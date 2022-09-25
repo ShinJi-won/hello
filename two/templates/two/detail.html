@@ -1,0 +1,30 @@
+{% extends 'two/basic.html' %}
+{% block con %}
+<div class="container">
+    <h2>{{ a.name }}</h2>
+    <p>{{ a.adr }}</p>
+
+    <p>
+        <a href="{% url 'food-delete' id=a.id %}?id={{ a.id }}">
+            <button class="btn btn-danger">삭제</button>
+        </a>
+    </p>
+
+     <p>
+        <a href="{% url 'review-make' food_id=a.id %}">
+            <button class="btn btn-info">리뷰</button>
+        </a>
+    </p>
+        <div class="card">
+        <div class="card-header"><h3>리뷰목록</h3></div>
+        <ul class="list-group list-group-flush">
+            {% for i in re %}
+            <li class="list-group-item">
+                {{ i.score }}점 | {{ i.comment }}
+                <a href="{% url 'review-delete' food_id=a.id review_id=i.id %}" class="btn btn-secondary btn-sm">&times;</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
